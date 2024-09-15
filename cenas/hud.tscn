@@ -1,0 +1,81 @@
+[gd_scene load_steps=2 format=3 uid="uid://j6n16jisp45t"]
+
+[ext_resource type="Script" path="res://scripts/Control.gd" id="1_sm0qs"]
+
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_sm0qs")
+
+[node name="Timer" type="Timer" parent="Control"]
+autostart = true
+
+[node name="container" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control/container"]
+layout_mode = 2
+size_flags_horizontal = 0
+
+[node name="restartBtn" type="Button" parent="Control/container/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "Reiniciar"
+
+[node name="timerContainer" type="HBoxContainer" parent="Control/container"]
+modulate = Color(0, 0, 0, 1)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 0
+
+[node name="Label" type="Label" parent="Control/container/timerContainer"]
+layout_mode = 2
+text = "Timer:"
+
+[node name="Label2" type="Label" parent="Control/container/timerContainer"]
+layout_mode = 2
+text = "00"
+
+[node name="scoreContainer" type="HBoxContainer" parent="Control/container"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 0
+
+[node name="score_label" type="Label" parent="Control/container/scoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Score:"
+
+[node name="score_counter" type="Label" parent="Control/container/scoreContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "00"
+
+[node name="VSeparator" type="VSeparator" parent="Control/container/scoreContainer"]
+layout_mode = 2
+
+[node name="exitBtn" type="Button" parent="Control/container/scoreContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_hover_color = Color(1, 1, 1, 1)
+text = "Exit"
+
+[connection signal="timeout" from="Control/Timer" to="Control" method="_on_timer_timeout"]
+[connection signal="pressed" from="Control/container/HBoxContainer/restartBtn" to="Control" method="_on_restart_btn_pressed"]
+[connection signal="pressed" from="Control/container/scoreContainer/exitBtn" to="Control" method="_on_exit_btn_pressed"]
